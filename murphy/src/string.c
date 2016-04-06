@@ -94,7 +94,7 @@ void *memset(void *ptr, int value, size_t num) {
 size_t strlen(const char *str) {
 
     size_t len = 0;
-    for (; str[len] != '\0', len++);
+    for (; str[len] != '\0'; len++);
 
     return len;
 }
@@ -105,7 +105,7 @@ char *strcat(char *destination, const char *source) {
 
 char *strncat(char *destination, const char *source, size_t num) {
 
-    char *put = *(destination + strlen(destination)); // 'put' points to the terminating 0 of 'destination'.
+    char *put = destination + strlen(destination); // 'put' points to the terminating 0 of 'destination'.
 
     // Until we see the terminating 0 of the source or we have copied 'num' bytes, we copy the current byte
     // of the source into the current byte of the destination.

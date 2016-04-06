@@ -1,10 +1,15 @@
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdarg.h>
+
 #include <kprintf.h>
 #include <tty.h>
+#include <string.h>
 
 static void kprint(const char *data, size_t data_length) {
 
     for (size_t i = 0; i < data_length; i++)
-        putchar((int)((const unsigned char *)data)[i]);
+        kputchar((int)((const unsigned char *)data)[i]);
 }
 
 int kprintf(const char *restrict format, ...) {
@@ -24,7 +29,7 @@ int kprintf(const char *restrict format, ...) {
                 amount = 1;
                 while (format[amount] && format[amount] != '%')
                     amount++;
-                print(format, amount);
+                kprint(format, amount);
                 format += amount;
                 written += amount;
                 continue;
@@ -46,12 +51,12 @@ int kprintf(const char *restrict format, ...) {
         if (*format == 'c') {
             format++;
             char c = (char)va_arg(parameters, int);
-            print(&c, sizeof c);
+            kprint(&c, sizeof c);
         }
         else if (*format == 's') {
             format++;
             const char *s = va_arg(parameters, const char *);
-            print(s, strlen(s));
+            kprint(s, strlen(s));
         }
         else {
             goto incomprehensible_conversion;
@@ -72,5 +77,5 @@ int kputchar(int ic) {
 }
 
 int kputs(const char *string) {
-    return printf("%s\n", string);
+    return kprintf("%s\n", string);
 }

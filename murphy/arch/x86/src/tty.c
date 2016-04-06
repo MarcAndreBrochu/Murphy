@@ -1,10 +1,11 @@
 #include <stddef.h> // size_t
 #include <stdint.h> // uint8_t, uint16_t
 
-#include <types.h>
+#include <vga_types.h>
 #include <tty.h>
 #include <vga.h>
 #include <io.h>
+#include <string.h>
 
 size_t cursor_x, cursor_y; // The x and y pos of the cursor
 uint8_t text_attrib;       // The background and foreground of a character
@@ -13,7 +14,7 @@ uint16_t *text_buffer;     // A 25*80 zone in memory that contains the VGA text
 /* Sets the attribute to a new value.
  * This is a local (static) function that acts as an helper.
  */
-static void kterm_set_attrib(vga_attrib_t attrib) {
+__attribute__((unused)) static void kterm_set_attrib(vga_attrib_t attrib) {
     text_attrib = attrib;
 }
 
@@ -29,7 +30,7 @@ void kterm_initialize() {
 
     cursor_x = 0;
     cursor_y = 0;
-    text_attrib = make_attrib(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+    text_attrib = make_vga_attrib(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
     text_buffer = VGA_TEXT_MEMORY;
 
     kterm_clear_screen();
@@ -37,7 +38,7 @@ void kterm_initialize() {
 
 void kterm_clear_screen() {
 
-    uint16_t blank = make_vgaentry(' ', text_attrib);
+    uint16_t blank = make_vga_entry(' ', text_attrib);
 
     for (size_t y = 0; y < VGA_SCREEN_HEIGHT; y++) {
         for (size_t x = 0; x < VGA_SCREEN_WIDTH; x++) {
@@ -50,7 +51,7 @@ void kterm_clear_screen() {
 
 void kterm_scroll() {
 
-    uint16_t blank = make_vgaentry(' ', text_attrib);
+    uint16_t blank = make_vga_entry(' ', text_attrib);
 
     // Move the chunk of memory at VGA_MEMORY one line up.
     for (size_t y = 1; y <= VGA_SCREEN_HEIGHT; y++) {
@@ -122,7 +123,7 @@ void kterm_putchar(char c) {
         kterm_scroll();
     }
 
-    kterm_move_cursor((uint16_t)(cursor_y * VGA_SCREEN_WIDTH + cursor_x));
+    kterm_move_cursor(cursor_y, cursor_x);
 }
 
 void kterm_write(const char *data, size_t size) {

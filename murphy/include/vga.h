@@ -3,7 +3,7 @@
 
 #include <stddef.h> // size_t
 #include <stdint.h> // uint16_t
-#include <types.h>  // vga_entry_t, vga_attrib_t
+#include <vga_types.h> // vga_entry_t, vga_attrib_t
 
 // The size in entries of the VGA buffer. That makes the VGA text memory 80*25=2000 entries long.
 // 2000 entries of 2 bytes each = 4000 bytes.
