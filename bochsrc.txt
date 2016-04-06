@@ -1,7 +1,7 @@
 megs:            32
 romimage:        file=/usr/local/Cellar/bochs/2.6.8/share/bochs/BIOS-bochs-latest
 vgaromimage:     file=/usr/local/Cellar/bochs/2.6.8/share/bochs/VGABIOS-lgpl-latest
-ata0-master:     type=cdrom, path=murphyos.iso, status=inserted
+ata0-master:     type=cdrom, path=murphy.iso, status=inserted
 boot:            cdrom
 log:             bochslog.txt
 clock:           sync=realtime, time0=local
