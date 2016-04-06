@@ -3,6 +3,7 @@ isodir/
 sysroot/
 *.iso
 *.kernel
+bochslog.txt
 
 .DS_Store
 .AppleDouble
