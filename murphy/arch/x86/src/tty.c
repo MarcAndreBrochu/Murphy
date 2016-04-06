@@ -2,9 +2,9 @@
 #include <stdint.h> // uint8_t, uint16_t
 
 #include <types.h>
-#include <kernel/tty.h>
-#include <kernel/vga.h>
-#include <kernel/io.h>
+#include <tty.h>
+#include <vga.h>
+#include <io.h>
 
 size_t cursor_x, cursor_y; // The x and y pos of the cursor
 uint8_t text_attrib;       // The background and foreground of a character
