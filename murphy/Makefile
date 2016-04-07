@@ -32,7 +32,7 @@ LIBS:=$(LIBS) $(KERNEL_ARCH_CFLAGS)
 OBJS:=\
 $(KERNEL_ARCH_OBJS) \
 src/kernel.o \
-src/kprintf.o \
+src/kprint.o \
 src/string.o \
 
 CRTI_OBJ:=$(ARCHDIR)/src/crti.o

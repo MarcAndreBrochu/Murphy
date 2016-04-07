@@ -1,12 +1,12 @@
 #include <tty.h>
-#include <kprintf.h>
+#include <kprint.h>
 
 #define WAIT_FOREVER() while (1) {}
 
 void kmain() {
 
     kterm_initialize();
-    kprintf("Hello from kernel! :)\n");
+    kprint("Hello from kernel! :)\n");
 
     // Put the kernel in idle (since kmain should not return)
     WAIT_FOREVER();
