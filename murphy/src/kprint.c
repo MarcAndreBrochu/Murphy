@@ -38,7 +38,7 @@ void kprint_hexu(unsigned int num) {
     }
 }
 
-void print_hexi(int num) {
+void kprint_hexi(int num) {
 
     if (num < 0) kwrite_char('-');
     kwrite_char('0');
